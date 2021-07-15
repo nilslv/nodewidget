@@ -1,0 +1,40 @@
+.widget {
+  max-width: 800px;
+  height: 50vw;
+  max-height: 400px;
+  background-color: #f5f4f9;
+  padding: 20px;
+  border: 3px solid #d3cfdd;
+  border-radius: 25px;
+  display: grid;
+  grid-template-columns: 1fr 44px 1fr;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+}
+.line {
+  background-color: #d3cfdd;
+  width: 3px;
+  margin: 0 20px;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 600px) {
+  .widget {
+    grid-template-columns: 1fr;
+    grid-template-rows: 257px 43px 1fr;
+    height: 500px;
+    max-height: none;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .line {
+    height: 3px;
+    width: auto;
+    margin: 20px 0;
+  }
+}
