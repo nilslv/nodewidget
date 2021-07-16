@@ -1,6 +1,6 @@
 {
   "name": "widget",
-  "homepage": "http://nilslv.github.io/nodewidget",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
