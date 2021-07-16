@@ -4,7 +4,7 @@ import { Helper } from "./scripts/paramInit";
 
 function Branding() {
   const helper = new Helper();
-  const branding = helper.initializeParam("branding", "text");
+  const branding = helper.initializeParam("branding", "true");
 
   const containerStyle = {
     alignSelf: "flex-end",
@@ -12,8 +12,10 @@ function Branding() {
     display: "flex",
     alignItems: "center",
     top: "10px",
+    left: "10px",
     color: "#2b1e6b",
     textDecoration: "none",
+    //backgroundColor: "orange",
   };
   const logoStyle = {
     marginLeft: "10px",

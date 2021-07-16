@@ -21,4 +21,7 @@
   p {
     font-size: 12px;
   }
+  #imagePreview {
+    height: 100%;
+  }
 }

@@ -13,6 +13,7 @@ function TextInput({ sampleText }) {
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
+    //backgroundColor: "grey",
   };
 
   // TODO get data from Levity application

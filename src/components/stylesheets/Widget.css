@@ -26,8 +26,8 @@
 @media only screen and (max-width: 600px) {
   .widget {
     grid-template-columns: 1fr;
-    grid-template-rows: 257px 43px 1fr;
-    height: 500px;
+    grid-template-rows: 1fr 43px 1fr;
+    height: auto;
     max-height: none;
   }
 }

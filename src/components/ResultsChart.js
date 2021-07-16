@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Chart from "react-apexcharts";
 import { ChartContext } from "./ChartContext";
+import { Helper } from "./scripts/paramInit";
 
 function ResultsChart() {
   const { dataState, labelState } = useContext(ChartContext);
@@ -51,11 +52,15 @@ function ResultsChart() {
     ],
   };
 
+  const helper = new Helper();
+  const branding = helper.initializeParam("branding", "true");
+
   const wrapperStyle = {
-    marginBottom: "30px",
+    marginBottom: branding === "false" ? "22px" : "0px",
     flexGrow: 1,
     display: "flex",
     alignItems: "center",
+    //backgroundColor: "lightgreen",
   };
 
   return (

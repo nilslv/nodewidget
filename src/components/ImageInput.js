@@ -16,6 +16,7 @@ function ImageInput({ sampleImage }) {
     flexDirection: "column",
     flexGrow: 1,
     padding: "10px 20px 10px 0",
+    //backgroundColor: "grey",
   };
   const previewStyle = {
     borderRadius: "10px",
@@ -24,6 +25,7 @@ function ImageInput({ sampleImage }) {
     height: "100%",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+    //backgroundPosition: "center",
     backgroundImage: "url(" + sampleImage + ")",
   };
   const buttonStyle = {
