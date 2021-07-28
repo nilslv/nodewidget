@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "./Input";
+// eslint-disable-next-line
 import ResultsChart from "./ResultsChart";
 import Branding from "./Branding";
 import "./stylesheets/Widget.css";

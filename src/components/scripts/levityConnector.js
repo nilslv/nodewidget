@@ -31,6 +31,19 @@ export class LevityConnector {
     });
     const json = await res.json();
     return json["predictions"]["results"];
+    /*await new Promise((r) => setTimeout(r, 2000));
+    return [
+      {
+        labelId: "a2ad11b0-085c-4753-aab9-9fdf1b76707b",
+        labelName: "positive",
+        confidence: 0.9884,
+      },
+      {
+        labelId: "96f3474b-6c83-4782-99cc-c7acebbf5d72",
+        labelName: "negative",
+        confidence: 0.0116,
+      },
+    ];*/
   }
 
   // call Levity API to classify images with an URL by results

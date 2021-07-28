@@ -15,7 +15,6 @@ function Branding() {
     left: "10px",
     color: "#2b1e6b",
     textDecoration: "none",
-    //backgroundColor: "orange",
   };
   const logoStyle = {
     marginLeft: "10px",
@@ -28,7 +27,7 @@ function Branding() {
     return (
       <>
         {" "}
-        <a href="https://levity.ai" style={containerStyle}>
+        <a href="https://levity.ai" style={containerStyle} target="_top">
           <p className="power">powered by</p>
           <img
             id="logo"

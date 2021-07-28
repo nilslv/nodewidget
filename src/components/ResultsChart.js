@@ -1,14 +1,17 @@
 import React, { useContext } from "react";
 import Chart from "react-apexcharts";
+import Spinner from "./Spinner";
 import { ChartContext } from "./ChartContext";
 import { Helper } from "./scripts/paramInit";
 
 function ResultsChart() {
-  const { dataState, labelState } = useContext(ChartContext);
+  const { dataState, labelState, loadingState } = useContext(ChartContext);
   // eslint-disable-next-line
   const [data, setData] = dataState;
   // eslint-disable-next-line
   const [labels, setLabels] = labelState;
+  // eslint-disable-next-line
+  const [isLoading, setLoading] = loadingState;
 
   const details = {
     options: {
@@ -60,20 +63,28 @@ function ResultsChart() {
     flexGrow: 1,
     display: "flex",
     alignItems: "center",
-    //backgroundColor: "lightgreen",
+    justifyContent: "center",
   };
 
-  return (
-    <div id="chart" style={wrapperStyle}>
-      <Chart
-        options={details.options}
-        series={details.series}
-        type="bar"
-        width="100%"
-        height={150 + labels.length * 15}
-      ></Chart>
-    </div>
-  );
+  if (isLoading) {
+    return (
+      <div id="chart" style={wrapperStyle}>
+        <Spinner></Spinner>
+      </div>
+    );
+  } else {
+    return (
+      <div id="chart" style={wrapperStyle}>
+        <Chart
+          options={details.options}
+          series={details.series}
+          type="bar"
+          width="100%"
+          height={150 + labels.length * 15}
+        ></Chart>
+      </div>
+    );
+  }
 }
 
 export default ResultsChart;

@@ -3,10 +3,13 @@ import { ChartContext } from "./ChartContext";
 import { LevityConnector } from "./scripts/levityConnector";
 
 function TextInput({ sampleText }) {
-  const { dataState, labelState } = useContext(ChartContext);
+  const { dataState, labelState, loadingState } = useContext(ChartContext);
   // eslint-disable-next-line
   const [data, setData] = dataState;
+  // eslint-disable-next-line
   const [labels, setLabels] = labelState;
+  // eslint-disable-next-line
+  const [isLoading, setLoading] = loadingState;
   const connector = new LevityConnector();
 
   const wrapperStyle = {
@@ -16,37 +19,27 @@ function TextInput({ sampleText }) {
     //backgroundColor: "grey",
   };
 
-  // TODO get data from Levity application
-
   // run once to get the sample text classified after the component is rendered
   useEffect(() => {
     async function fetchResults() {
       const results = await connector.classifyTextFromLevity(sampleText);
       setData(LevityConnector.getTop5Confidences(results));
-      const test = LevityConnector.getTop5Labels(results);
-      setLabels(test);
+      setLabels(LevityConnector.getTop5Labels(results));
+      setLoading(false);
     }
     fetchResults();
     // eslint-disable-next-line
   }, []);
 
   const updateChart = async (text) => {
-    console.log(`should be sending text: ${text} to classify`);
-    // get back results from Levity API
     const results = await connector.classifyTextFromLevity(text);
-    const unorderedData = LevityConnector.getTop5Confidences(results);
-    const unorderedLabels = LevityConnector.getTop5Labels(results);
-
-    // order data according to existing labels
-    let orderedData = [];
-    for (let i = 0; i < unorderedData.length; i++) {
-      let label = unorderedLabels[i];
-      orderedData[labels.indexOf(label)] = unorderedData[i];
-    }
-    setData(orderedData);
+    setData(LevityConnector.getTop5Confidences(results));
+    setLabels(LevityConnector.getTop5Labels(results));
+    setLoading(false);
   };
 
   const triggerUpdate = () => {
+    setLoading(true);
     updateChart(document.getElementById("textinput").value);
   };
 

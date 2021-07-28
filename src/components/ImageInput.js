@@ -3,20 +3,21 @@ import { ChartContext } from "./ChartContext";
 import { LevityConnector } from "./scripts/levityConnector";
 
 function ImageInput({ sampleImage }) {
-  const { dataState, labelState } = useContext(ChartContext);
+  const { dataState, labelState, loadingState } = useContext(ChartContext);
   // eslint-disable-next-line
   const [data, setData] = dataState;
   // eslint-disable-next-line
   const [labels, setLabels] = labelState;
+  // eslint-disable-next-line
+  const [isLoading, setLoading] = loadingState;
+
   const connector = new LevityConnector();
-  let fixedLabels = [];
 
   const wrapperStyle = {
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
     padding: "10px 20px 10px 0",
-    //backgroundColor: "grey",
   };
   const previewStyle = {
     borderRadius: "10px",
@@ -25,7 +26,6 @@ function ImageInput({ sampleImage }) {
     height: "100%",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
-    //backgroundPosition: "center",
     backgroundImage: "url(" + sampleImage + ")",
   };
   const buttonStyle = {
@@ -33,37 +33,25 @@ function ImageInput({ sampleImage }) {
     color: "#2b1e6b",
   };
 
-  // TODO get data from Levity application
-
   // run once to get the sample text classified after the component is rendered
   useEffect(() => {
     enableImageUploadAndUpdate();
-    async function fetchResults() {
+    async function fetchResultsAndUpdate() {
       const results = await connector.classifyURLFromLevity(sampleImage);
       setData(LevityConnector.getTop5Confidences(results));
-      const labelResults = LevityConnector.getTop5Labels(results);
-      // eslint-disable-next-line
-      fixedLabels = labelResults;
-      setLabels(labelResults);
+      setLabels(LevityConnector.getTop5Labels(results));
+      setLoading(false);
     }
-    fetchResults();
+    fetchResultsAndUpdate();
     // eslint-disable-next-line
   }, []);
 
   const updateChart = async (dataurl) => {
     // get back results from Levity API
     const results = await connector.classifyFileFromLevity(dataurl);
-    const unorderedData = LevityConnector.getTop5Confidences(results);
-    const unorderedLabels = LevityConnector.getTop5Labels(results);
-
-    // order data according to existing labels
-    let orderedData = [];
-    for (let i = 0; i < unorderedData.length; i++) {
-      let label = unorderedLabels[i];
-      orderedData[fixedLabels.indexOf(label)] = unorderedData[i];
-    }
-    console.log(orderedData);
-    setData(orderedData);
+    setData(LevityConnector.getTop5Confidences(results));
+    setLabels(LevityConnector.getTop5Labels(results));
+    setLoading(false);
   };
 
   const enableImageUploadAndUpdate = () => {
@@ -80,18 +68,13 @@ function ImageInput({ sampleImage }) {
       .getElementById("imgup")
       .addEventListener("change", async function () {
         if (this.files && this.files[0]) {
+          setLoading(true);
           var reader = new FileReader();
           reader.onload = function (e) {
             preview.style.backgroundImage = "url(" + e.target.result + ")";
             updateChart(reader.result);
           };
           reader.readAsDataURL(this.files[0]);
-
-          /*const res = await reader.readAsDataURL(this.files[0]);
-          console.log(res);
-          let form = new FormData();
-          form.append("file", reader.readAsDataURL(this.files[0]));
-          updateChart(form);*/
         }
       });
   };
