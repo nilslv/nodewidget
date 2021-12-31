@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import Chart from "react-apexcharts";
-import Spinner from "./Spinner";
+import Spinner from "../generalComponents/Spinner";
 import { ChartContext } from "./ChartContext";
-import { Helper } from "./scripts/paramInit";
+import { Helper } from "../scripts/paramInit";
 
 function ResultsChart() {
   const { dataState, labelState, loadingState } = useContext(ChartContext);
@@ -49,7 +49,7 @@ function ResultsChart() {
     },
     series: [
       {
-        name: "series-1",
+        name: "confidence",
         data: data,
       },
     ],

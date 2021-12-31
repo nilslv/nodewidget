@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "../resources/levity-logo.png";
-import { Helper } from "./scripts/paramInit";
+import logo from "../../resources/levity-logo.png";
+import { Helper } from "../scripts/paramInit";
 
 function Branding() {
   const helper = new Helper();

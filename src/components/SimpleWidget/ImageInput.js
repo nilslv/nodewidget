@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { ChartContext } from "./ChartContext";
-import { LevityConnector } from "./scripts/levityConnector";
+import { LevityConnector } from "../scripts/levityConnector";
 
 function ImageInput({ sampleImage }) {
   const { dataState, labelState, loadingState } = useContext(ChartContext);
@@ -89,7 +89,7 @@ function ImageInput({ sampleImage }) {
         accept="image/*"
         style={{ display: "none" }}
       ></input>
-      <button id="classifyimg" style={buttonStyle}>
+      <button className="button" id="classifyimg" style={buttonStyle}>
         Select different image
       </button>
     </div>

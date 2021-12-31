@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { ChartContext } from "./ChartContext";
-import { LevityConnector } from "./scripts/levityConnector";
+import { LevityConnector } from "../scripts/levityConnector";
 
 function TextInput({ sampleText }) {
   const { dataState, labelState, loadingState } = useContext(ChartContext);
@@ -46,7 +46,7 @@ function TextInput({ sampleText }) {
   return (
     <div style={wrapperStyle}>
       <textarea id="textinput" placeholder={sampleText}></textarea>
-      <button id="classifytxt" onClick={triggerUpdate}>
+      <button className="button" id="classifytxt" onClick={triggerUpdate}>
         Classify Text
       </button>
     </div>

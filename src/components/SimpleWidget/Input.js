@@ -1,7 +1,7 @@
 import React from "react";
 import TextInput from "./TextInput";
 import ImageInput from "./ImageInput";
-import { Helper } from "./scripts/paramInit";
+import { Helper } from "../scripts/paramInit";
 
 function Input() {
   // get all relevant URL parameters and pass them down

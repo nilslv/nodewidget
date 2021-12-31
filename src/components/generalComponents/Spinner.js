@@ -1,5 +1,5 @@
 import React from "react";
-import "./stylesheets/Spinner.css";
+import "../stylesheets/Spinner.css";
 
 function Spinner() {
   const optional = false;
